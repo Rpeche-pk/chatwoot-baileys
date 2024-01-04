@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const {join} = require('path')
 const {createReadStream} = require('fs')
+const {wait, getRandomDelay,typingTime} = require('../util/delay.util');
 
 /**
  * Esta clase esta relacionada con todo lo que tiene que ver
@@ -50,7 +51,7 @@ class ServerHttp {
             if (body?.event === 'conversation_updated' && mapperAttributes.includes('assignee_id')) {
                 const phone = body?.meta?.sender?.phone_number.replace('+', '')
                 const idAssigned = body?.changed_attributes[0]?.assignee_id?.current_value ?? null
-        
+                console.log(`[BLACKLIST] ${phone} ${idAssigned}`);
                 if(idAssigned){
                     bot.dynamicBlacklist.add(phone)
                 }else{
@@ -67,12 +68,19 @@ class ServerHttp {
             if (checkIfMessage) {
                 const phone = body.conversation?.meta?.sender?.phone_number.replace('+', '')
                 const content = body?.content ?? '';
+                const jid = `${phone}@s.whatsapp.net`
 
                 const file = attachments?.length ? attachments[0] : null;
                 if (file) {
-                    console.log(`Este es el archivo adjunto...`, file.data_url)
+                    console.log(`\nEste es el archivo adjunto... `, file.data_url)
+                    await bot.providerClass.vendor.presenceSubscribe(jid);
+                    await wait(getRandomDelay(700,500));
+                    await bot.providerClass.vendor.sendPresenceUpdate("composing", jid);
+                    await wait(getRandomDelay(980,550));
+                    await bot.providerClass.vendor.sendPresenceUpdate("paused", jid);
+
                     await bot.providerClass.sendMedia(
-                        `${phone}@c.us`,
+                        `${phone}@s.whatsapp.net`,
                         file.data_url,
                         content,
                     );
@@ -85,6 +93,12 @@ class ServerHttp {
                 /**
                  * esto envia un mensaje de texto al ws
                  */
+                await bot.providerClass.vendor.presenceSubscribe(jid);
+                await wait(getRandomDelay(750,500));
+                await bot.providerClass.vendor.sendPresenceUpdate("composing", jid);
+                console.log(">>>>Tiempo de escritura", typingTime(content));
+                await wait(typingTime(content));
+                await bot.providerClass.vendor.sendPresenceUpdate("paused", jid);
                 await bot.providerClass.sendMessage(
                     `${phone}`,
                     content,

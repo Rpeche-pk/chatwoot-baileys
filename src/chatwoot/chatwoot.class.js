@@ -30,7 +30,7 @@ class ChatwootClass {
 
     /**
      * [utility]
-     * Formateo del formato del numero +34 34
+     * Formateo del formato del numero +51 966....
      * @param {*} number 
      * @returns 
      */
@@ -48,7 +48,7 @@ class ChatwootClass {
      */
     buildHeader = () => {
         const headers = new Headers()
-        headers.append('api_access_token', this.config.token)
+        headers.append('api_access_token', process.env.CHATWOOT_TOKEN)
         headers.append('Content-Type', 'application/json')
         return headers
     }
@@ -187,7 +187,7 @@ class ChatwootClass {
         try {
             dataIn.phone_number = this.formatNumber(dataIn.phone_number)
 
-            const payload = [
+            /*const payload = [
                 {
                     attribute_key: "phone_number",
                     attribute_model: "standard",
@@ -206,10 +206,22 @@ class ChatwootClass {
                     body: JSON.stringify({ payload }),
                 }
             );
+            console.log("FIND CONVERSATION", dataFetch);
 
 
-            const data = await dataFetch.json();
-            return data.payload
+            const data = await dataFetch.json();*/
+            const url = this.buildBaseUrl(`/conversations`)
+            const dataFetch = await fetch(url, {
+                headers: this.buildHeader(),
+                method: 'GET',
+            });
+            const conversation = await dataFetch.json();
+            const existConversation = conversation.data.payload.find(conversation => conversation.meta.sender.phone_number === dataIn.phone_number);
+            if (!existConversation) {
+                return;
+            }
+            console.log("EXISTE LA CONVERSACION?", existConversation.id)
+            return existConversation;
         } catch (error) {
             console.error(`[Error findConversation]`, error)
             return
@@ -226,12 +238,12 @@ class ChatwootClass {
         try {
             dataIn.phone_number = this.formatNumber(dataIn.phone_number)
             const getId = await this.findConversation(dataIn)
-            if (!getId.length) {
+            if (!getId) {
                 console.log('Crear conversation')
                 const conversationId = await this.createConversation(dataIn)
                 return conversationId
             }
-            return getId[0]
+            return getId;
         } catch (error) {
             console.error(`[Error findOrCreateInbox]`, error)
             return
@@ -324,9 +336,11 @@ class ChatwootClass {
             })
 
             const data = await dataFetch.json();
+            console.log("FIND INBOX",data.payload);
             const payload = data.payload
 
             const checkIfExist = payload.find((o) => o.name === dataIn.name)
+            console.log("EXISTE EL INBOX?",checkIfExist);
 
             if (!checkIfExist) {
                 return

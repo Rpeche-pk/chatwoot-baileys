@@ -5,10 +5,11 @@ const mimeType = require('mime-types')
 const fs = require('node:fs/promises');
 const BaileysProvider = require('@bot-whatsapp/provider/baileys')
 const { downloadMediaMessage } = require('@whiskeysockets/baileys');
-const MockAdapter = require('@bot-whatsapp/database/mock')
-const ServerHttp = require('./src/http')
+const JsonFileAdapter = require("@bot-whatsapp/database/json");
+const ServerHttp = require('./src/http/http.class')
 const ChatwootClass = require('./src/chatwoot/chatwoot.class')
 const { handlerMessage } = require('./src/chatwoot')
+const {convertOggMp3}= require('./src/util/convert.util');
 
 const PORT = process.env.PORT ?? 3001
 
@@ -30,9 +31,9 @@ const queue = new Queue({
 })
 
 const main = async () => {
-    const adapterDB = new MockAdapter()
+    const adapterDB = new JsonFileAdapter()
     const adapterFlow = createFlow([flowPrincipal])
-    const adapterProvider = createProvider(BaileysProvider)
+    const adapterProvider = createProvider(BaileysProvider,{ usePairingCode: true, phoneNumber: process.env.PHONE_NUMBER})
 
     const bot = await createBot({
         flow: adapterFlow,
@@ -46,26 +47,33 @@ const main = async () => {
      * Los mensajes entrantes al bot (cuando el cliente nos escribe! <---)
      */
 
+    // 2° opcion !payload?.message.extendedTextMessage.text
     adapterProvider.on('message', (payload) => {
         console.log('payload', payload)
         queue.enqueue(async () => {
-            
             try {
 
                 const attachment = []
                 /**
                  * Determinar si el usuario esta enviando una imagen o video o fichero
-                 * luego puedes ver los fichero en http://localhost:3001/file.pdf o la extension
+                 * luego puedes ver los fichero en http://localhost:PORT/file.pdf o la extension
                  */
                 if (payload?.body.includes('_event_')) {
-                    const mime = payload?.message?.imageMessage?.mimetype ?? payload?.message?.videoMessage?.mimetype ?? payload?.message?.documentMessage?.mimetype;
+                    const mime = payload?.message?.imageMessage?.mimetype ?? payload?.message?.videoMessage?.mimetype ?? payload?.message?.documentMessage?.mimetype ?? payload?.message?.audioMessage?.mimetype;
                     const extension = mimeType.extension(mime);
+                    console.log("extension", extension);
                     const buffer = await downloadMediaMessage(payload, "buffer");
-                    const fileName = `file-${Date.now()}.${extension}`
-                    const pathFile = `${process.cwd()}/public/${fileName}`
+                    const fileName = `file-${Date.now()}.${extension}`;
+                    const pathFile = `${process.cwd()}/public/${fileName}`;
                     await fs.writeFile(pathFile, buffer);
-                    console.log(`[FIECHERO CREADO] http://localhost:3001/${fileName}`)
-                    attachment.push(pathFile)
+                    if(extension === 'oga'){
+                        // todo convirtiendo audio oga en mp3 y guardandolo
+                        await convertOggMp3(pathFile,pathFile.replace('.oga','.mp3'));
+                        //todo eliminando el archivo oga
+                        await fs.unlink(pathFile);
+                    }
+                    console.log(`[FICHERO CREADO] 📋 http://localhost:${PORT}/${fileName}`);
+                    attachment.push(pathFile.replace('.oga','.mp3'))
                 }
 
                 await handlerMessage({

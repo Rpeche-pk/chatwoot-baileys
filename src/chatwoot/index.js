@@ -11,6 +11,7 @@ const handlerMessage = async (dataIn = {phone:'', name:'', message: '', mode:'',
         contact_id: contact.id,
         phone_number: dataIn.phone
     })
+    console.log("Conversation", conversation);
     await chatwoot.createMessage({
         msg: dataIn.message, 
         mode: dataIn.mode, 
