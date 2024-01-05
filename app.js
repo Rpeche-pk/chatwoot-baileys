@@ -33,7 +33,7 @@ const queue = new Queue({
 const main = async () => {
     const adapterDB = new JsonFileAdapter()
     const adapterFlow = createFlow([flowPrincipal])
-    const adapterProvider = createProvider(BaileysProvider,{ usePairingCode: true, phoneNumber: process.env.PHONE_NUMBER})
+    const adapterProvider = createProvider(BaileysProvider,{ usePairingCode: process.env.USE_PAIRING_CODE, phoneNumber: process.env.PHONE_NUMBER})
 
     const bot = await createBot({
         flow: adapterFlow,

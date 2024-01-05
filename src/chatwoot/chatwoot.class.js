@@ -336,11 +336,9 @@ class ChatwootClass {
             })
 
             const data = await dataFetch.json();
-            console.log("FIND INBOX",data.payload);
             const payload = data.payload
 
             const checkIfExist = payload.find((o) => o.name === dataIn.name)
-            console.log("EXISTE EL INBOX?",checkIfExist);
 
             if (!checkIfExist) {
                 return
@@ -373,6 +371,20 @@ class ChatwootClass {
             return
         }
     }
+    searchByNumber = async (phone) => {
+        const requestOptions = {
+          method: "GET",
+          headers: this.buildHeader(),
+        };
+    
+        const dataAPI = await fetch(
+          `${this.api}/api/v1/accounts/${this.config.account}/contacts/search?include_contact_inboxes=false&page=1&sort=-last_activity_at&q=${phone}`,
+          requestOptions
+        );
+        const data = await dataAPI.json();
+        console.log(data.payload)
+        return data.payload;
+      };
 
 }
 
