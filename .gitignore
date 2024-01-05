@@ -1,4 +1,5 @@
 *_sessions
+.vscode
 .env
 *.log
 *.png
