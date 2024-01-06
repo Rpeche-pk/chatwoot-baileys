@@ -15,6 +15,7 @@
         "@bot-whatsapp/portal": "dev",
         "@bot-whatsapp/provider": "dev",
         "@whiskeysockets/baileys": "^6.5.0",
+        "chalk": "^4.1.2",
         "cors": "^2.8.5",
         "dotenv": "^16.3.1",
         "express": "^4.18.2",

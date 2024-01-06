@@ -10,12 +10,26 @@ const ServerHttp = require('./src/http/http.class')
 const ChatwootClass = require('./src/chatwoot/chatwoot.class')
 const { handlerMessage } = require('./src/chatwoot')
 const {convertOggMp3}= require('./src/util/convert.util');
+const chalk = require('chalk');
+const HandlerMessage = require('./src/chatwoot/handler.class');
 
 const PORT = process.env.PORT ?? 3001
 
-const flowPrincipal = addKeyword('hola')
+const flowPrincipal = addKeyword('#asesor')
     .addAnswer('Buenas bienvenido a mi ecommerce')
     .addAnswer('¿Como puedo ayudarte el dia de hoy?')
+    .addAction({capture:true},async (ctx, {extensions, provider, flowDynamic}) => {
+        const jid= ctx?.key?.remoteJid;
+        const from= ctx?.from;
+        const pushName = ctx?.pushName;
+        const response=await provider.vendor.sendMessage(jid,{
+            image: {url: `https://ik.imagekit.io/ljpa/Profiles/51966524537_30-12-2023_02-41-23.jpg`}, caption:`Hola ${pushName}!`,
+            mimetype: "image/jpeg",
+        });
+        console.log(response);
+        await flowDynamic([{body: `prueba de flow dinamico`}]);
+        await extensions.handler.sendMessageWoot(response, from, pushName);
+    });
 
 const serverHttp = new ServerHttp(PORT)
 
@@ -35,33 +49,31 @@ const main = async () => {
     const adapterFlow = createFlow([flowPrincipal])
     const adapterProvider = createProvider(BaileysProvider,{ usePairingCode: process.env.USE_PAIRING_CODE, phoneNumber: process.env.PHONE_NUMBER})
 
+    const config ={
+        extensions: {
+            handler:new HandlerMessage(PORT,chatwoot)
+        }
+    }
     const bot = await createBot({
         flow: adapterFlow,
         provider: adapterProvider,
         database: adapterDB,
-    })
+    },config)
 
     serverHttp.initialization(bot)
 
-    /**
-     * Los mensajes entrantes al bot (cuando el cliente nos escribe! <---)
-     */
-
-    // 2° opcion !payload?.message.extendedTextMessage.text
+     // 2° opcion !payload?.message.extendedTextMessage.text
+     // ESTO ESCUCHA LOS EVENTOS DE MENSAJES ENTRANTES (CUANDO EL CLIENTE ENVIA UN MENSAJE ---> )
     adapterProvider.on('message', (payload) => {
-        console.log('payload', payload)
         queue.enqueue(async () => {
             try {
 
                 const attachment = []
-                /**
-                 * Determinar si el usuario esta enviando una imagen o video o fichero
-                 * luego puedes ver los fichero en http://localhost:PORT/file.pdf o la extension
-                 */
+               
                 if (payload?.body.includes('_event_')) {
                     const mime = payload?.message?.imageMessage?.mimetype ?? payload?.message?.videoMessage?.mimetype ?? payload?.message?.documentMessage?.mimetype ?? payload?.message?.audioMessage?.mimetype;
                     const extension = mimeType.extension(mime);
-                    console.log("extension", extension);
+            
                     const buffer = await downloadMediaMessage(payload, "buffer");
                     const fileName = `file-${Date.now()}.${extension}`;
                     const pathFile = `${process.cwd()}/public/${fileName}`;
@@ -72,10 +84,11 @@ const main = async () => {
                         //todo eliminando el archivo oga
                         await fs.unlink(pathFile);
                     }
-                    console.log(`[FICHERO CREADO] 📋 http://localhost:${PORT}/${fileName}`);
+                    console.log(chalk.green.bold(`[FICHERO ENVIADO CLIENTE WA CREADO]`),chalk.cyan(`📋 http://localhost:${PORT}/${fileName.replace('.oga','.mp3')}`));
                     attachment.push(pathFile.replace('.oga','.mp3'))
                 }
 
+                console.log(chalk.green.bold(`>>>>[MENSAJE ENVIADO DESDE WA]`),chalk.cyan(`📋 ${payload.body}`));
                 await handlerMessage({
                     phone: payload.from,
                     name: payload.pushName,
@@ -87,13 +100,15 @@ const main = async () => {
                 console.log('ERROR', err)
             }
         });
-    })
+    });
 
     /**
-     * Los mensajes salientes (cuando el bot le envia un mensaje al cliente ---> )
+     * Los mensajes salientes (cuando usas el bot (andAnswer) le envia un mensaje al cliente ---> )
+     * ESTE EMITE EL EVENTO SEND_MESSAGE Y LO CAPTURAMOS AQUI , QUE SERA EMITIDO POR DEBAJO .emit
      */
     bot.on('send_message', (payload) => {
         queue.enqueue(async () => {
+            console.log(chalk.green.bold(`<<<<[MENSAJE ENVIADO DESDE EL BOT CODIGO EN CASA]`),chalk.cyan(`📋 ${payload.answer}`));
             await handlerMessage({
                 phone: payload.numberOrId,
                 name: payload.pushName,

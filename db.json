@@ -1,10 +1,88 @@
 [
   {
-    "ref": "64fa9161-e3e3-49b3-9ff7-9bd39d35ef9c",
-    "keyword": "7f14a391ebce0af52cb97ffe2237f7a9",
-    "answer": "Listo",
+    "ref": "848d0cbb-ba3f-44df-808e-25d781bc125e",
+    "keyword": "5d06f4c1e23baa2e4d1227315ac00ede",
+    "answer": "#asesor",
     "options": {},
     "from": "51966524537",
-    "refSerialize": "897b8f72752ba0a3f0a1e4a0843b02ba"
+    "refSerialize": "4f0e4ea4808a3ae64710412f30681e4b"
+  },
+  {
+    "ref": "ans_175459aa-b658-47a6-8535-53bcf908c444",
+    "keyword": "key_e11183f9-2195-42e0-808d-af35361028f8",
+    "answer": "Buenas bienvenido a mi ecommerce",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": false
+    },
+    "refSerialize": "e45cfa57fbb22f3c05c3bf62811407e7",
+    "from": "51966524537"
+  },
+  {
+    "ref": "ans_19bb6fdd-6f1b-49a6-a654-2f29ca2b74c5",
+    "keyword": "ans_175459aa-b658-47a6-8535-53bcf908c444",
+    "answer": "¿Como puedo ayudarte el dia de hoy?",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": false
+    },
+    "refSerialize": "f2f1befb39e0030b69242695e217ac02",
+    "from": "51966524537"
+  },
+  {
+    "ref": "ans_b5a8965f-f9f1-4758-afd1-ebd583cd1b99",
+    "keyword": "ans_19bb6fdd-6f1b-49a6-a654-2f29ca2b74c5",
+    "answer": "__capture_only_intended__",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": true,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "6efb4533c0a44554aa94956d5ae025d3",
+    "from": "51966524537"
+  },
+  {
+    "ref": "29f4f33e-1964-42a5-972a-24b5f8126720",
+    "keyword": "6efb4533c0a44554aa94956d5ae025d3",
+    "answer": "Buenas noches",
+    "options": {},
+    "from": "51966524537",
+    "refSerialize": "91ea9dfc5f36aa0d03a64862d24d7171"
+  },
+  {
+    "ref": "79be6e3b-fad4-4d69-9ad5-9db2bc5d334f",
+    "keyword": null,
+    "answer": "prueba de flow dinamico",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "51966524537",
+    "refSerialize": "6ec55e008f13474bcec8131a7f369a6e"
   }
 ]

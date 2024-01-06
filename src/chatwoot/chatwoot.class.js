@@ -220,7 +220,7 @@ class ChatwootClass {
             if (!existConversation) {
                 return;
             }
-            console.log("EXISTE LA CONVERSACION?", existConversation.id)
+
             return existConversation;
         } catch (error) {
             console.error(`[Error findConversation]`, error)
@@ -275,7 +275,7 @@ class ChatwootClass {
                 {
                     method: "POST",
                     headers: {
-                        api_access_token:this.config.token
+                        api_access_token:this.config.token,
                     },
                     body: form
                 }

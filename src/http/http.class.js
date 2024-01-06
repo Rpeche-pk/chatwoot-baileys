@@ -3,6 +3,7 @@ const cors = require('cors')
 const {join} = require('path')
 const {createReadStream} = require('fs')
 const {wait, getRandomDelay,typingTime} = require('../util/delay.util');
+const chalk = require('chalk');
 
 /**
  * Esta clase esta relacionada con todo lo que tiene que ver
@@ -72,11 +73,10 @@ class ServerHttp {
 
                 const file = attachments?.length ? attachments[0] : null;
                 if (file) {
-                    console.log(`\nEste es el archivo adjunto... `, file.data_url)
                     await bot.providerClass.vendor.presenceSubscribe(jid);
                     await wait(getRandomDelay(700,500));
                     await bot.providerClass.vendor.sendPresenceUpdate("composing", jid);
-                    await wait(getRandomDelay(980,550));
+                    await wait(getRandomDelay(980,800));
                     await bot.providerClass.vendor.sendPresenceUpdate("paused", jid);
 
                     await bot.providerClass.sendMedia(
@@ -84,6 +84,7 @@ class ServerHttp {
                         file.data_url,
                         content,
                     );
+                    console.log(chalk.green.bold(`<<<<[MENSAJE MULTIMEDIA ENVIADO DESDE CHAT WOOT]`),chalk.cyan(`📋 ${file.data_url}`));
                     res.send('ok')
                     return
                 }
@@ -96,7 +97,7 @@ class ServerHttp {
                 await bot.providerClass.vendor.presenceSubscribe(jid);
                 await wait(getRandomDelay(750,500));
                 await bot.providerClass.vendor.sendPresenceUpdate("composing", jid);
-                console.log(">>>>Tiempo de escritura", typingTime(content));
+                console.log(chalk.cyan.bold(">>>>Tiempo de escritura"), typingTime(content));
                 await wait(typingTime(content));
                 await bot.providerClass.vendor.sendPresenceUpdate("paused", jid);
                 await bot.providerClass.sendMessage(
@@ -104,6 +105,7 @@ class ServerHttp {
                     content,
                     {}
                 );
+                console.log(chalk.green.bold(`<<<<[MENSAJE ENVIADO DESDE CHAT WOOT]`),chalk.cyan(`📋 ${content}`));
 
                 res.send('ok');
                 return;
