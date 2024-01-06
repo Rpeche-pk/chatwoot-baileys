@@ -1,15 +1,23 @@
 [
   {
-    "ref": "848d0cbb-ba3f-44df-808e-25d781bc125e",
-    "keyword": "5d06f4c1e23baa2e4d1227315ac00ede",
+    "ref": "e048d5f9-3e30-454f-89f3-5fdc82e4380a",
+    "keyword": "c22e4066d61d81721def9b25d8a397e8",
+    "answer": "Hola",
+    "options": {},
+    "from": "51966524537",
+    "refSerialize": "c22e4066d61d81721def9b25d8a397e8"
+  },
+  {
+    "ref": "05e68dc0-01fc-40da-88af-9fde4b03f855",
+    "keyword": "c22e4066d61d81721def9b25d8a397e8",
     "answer": "#asesor",
     "options": {},
     "from": "51966524537",
     "refSerialize": "4f0e4ea4808a3ae64710412f30681e4b"
   },
   {
-    "ref": "ans_175459aa-b658-47a6-8535-53bcf908c444",
-    "keyword": "key_e11183f9-2195-42e0-808d-af35361028f8",
+    "ref": "ans_41a67499-1a32-48f6-8b5b-a0d13383950a",
+    "keyword": "key_4667be94-ca4c-4587-ac70-a35d37d16ebc",
     "answer": "Buenas bienvenido a mi ecommerce",
     "options": {
       "media": null,
@@ -23,12 +31,12 @@
       "keyword": {},
       "callback": false
     },
-    "refSerialize": "e45cfa57fbb22f3c05c3bf62811407e7",
+    "refSerialize": "127470f366a3475f4aa78963cb38224d",
     "from": "51966524537"
   },
   {
-    "ref": "ans_19bb6fdd-6f1b-49a6-a654-2f29ca2b74c5",
-    "keyword": "ans_175459aa-b658-47a6-8535-53bcf908c444",
+    "ref": "ans_8b9a83e3-0918-44dd-9fde-6475ff363a01",
+    "keyword": "ans_41a67499-1a32-48f6-8b5b-a0d13383950a",
     "answer": "¿Como puedo ayudarte el dia de hoy?",
     "options": {
       "media": null,
@@ -42,12 +50,12 @@
       "keyword": {},
       "callback": false
     },
-    "refSerialize": "f2f1befb39e0030b69242695e217ac02",
+    "refSerialize": "0775efeb10fa02be042799a98f8a70e8",
     "from": "51966524537"
   },
   {
-    "ref": "ans_b5a8965f-f9f1-4758-afd1-ebd583cd1b99",
-    "keyword": "ans_19bb6fdd-6f1b-49a6-a654-2f29ca2b74c5",
+    "ref": "ans_2fee040e-feb6-4b6b-afe6-c75b9ee48fbd",
+    "keyword": "ans_8b9a83e3-0918-44dd-9fde-6475ff363a01",
     "answer": "__capture_only_intended__",
     "options": {
       "media": null,
@@ -61,23 +69,109 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "6efb4533c0a44554aa94956d5ae025d3",
+    "refSerialize": "1fd4d870d9c13907d11de56b450a9a9c",
     "from": "51966524537"
   },
   {
-    "ref": "29f4f33e-1964-42a5-972a-24b5f8126720",
-    "keyword": "6efb4533c0a44554aa94956d5ae025d3",
-    "answer": "Buenas noches",
+    "ref": "e2ee8489-fd97-4d0f-a5ef-a93bc982a768",
+    "keyword": "1fd4d870d9c13907d11de56b450a9a9c",
+    "answer": "Birn",
     "options": {},
     "from": "51966524537",
-    "refSerialize": "91ea9dfc5f36aa0d03a64862d24d7171"
+    "refSerialize": "cab6d1c53a4cd5ddb8b2f96547112767"
   },
   {
-    "ref": "79be6e3b-fad4-4d69-9ad5-9db2bc5d334f",
+    "ref": "e12f691e-6926-4701-b522-d6e9205dac24",
     "keyword": null,
     "answer": "prueba de flow dinamico",
     "options": {
+      "media": "https://i.imgur.com/0HpzsEm.png",
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "51966524537",
+    "refSerialize": "6ec55e008f13474bcec8131a7f369a6e"
+  },
+  {
+    "ref": "7b9537e7-db65-487d-a06f-8fae584693fb",
+    "keyword": "cab6d1c53a4cd5ddb8b2f96547112767",
+    "answer": "#asesor",
+    "options": {},
+    "from": "51966524537",
+    "refSerialize": "4f0e4ea4808a3ae64710412f30681e4b"
+  },
+  {
+    "ref": "ans_41a67499-1a32-48f6-8b5b-a0d13383950a",
+    "keyword": "key_4667be94-ca4c-4587-ac70-a35d37d16ebc",
+    "answer": "Buenas bienvenido a mi ecommerce",
+    "options": {
       "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": false
+    },
+    "refSerialize": "127470f366a3475f4aa78963cb38224d",
+    "from": "51966524537"
+  },
+  {
+    "ref": "ans_8b9a83e3-0918-44dd-9fde-6475ff363a01",
+    "keyword": "ans_41a67499-1a32-48f6-8b5b-a0d13383950a",
+    "answer": "¿Como puedo ayudarte el dia de hoy?",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": false
+    },
+    "refSerialize": "0775efeb10fa02be042799a98f8a70e8",
+    "from": "51966524537"
+  },
+  {
+    "ref": "ans_2fee040e-feb6-4b6b-afe6-c75b9ee48fbd",
+    "keyword": "ans_8b9a83e3-0918-44dd-9fde-6475ff363a01",
+    "answer": "__capture_only_intended__",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": true,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "1fd4d870d9c13907d11de56b450a9a9c",
+    "from": "51966524537"
+  },
+  {
+    "ref": "345cfb69-0dc9-4576-8f18-fabffc129c7c",
+    "keyword": "1fd4d870d9c13907d11de56b450a9a9c",
+    "answer": "Goodd",
+    "options": {},
+    "from": "51966524537",
+    "refSerialize": "7435959a587a60a32869e9023201a369"
+  },
+  {
+    "ref": "9be8fcfe-c596-4e22-8962-94c9f06e63f6",
+    "keyword": null,
+    "answer": "prueba de flow dinamico",
+    "options": {
+      "media": "https://i.imgur.com/0HpzsEm.png",
       "buttons": [],
       "capture": false,
       "delay": 0

@@ -27,7 +27,7 @@ const flowPrincipal = addKeyword('#asesor')
             mimetype: "image/jpeg",
         });
         console.log(response);
-        await flowDynamic([{body: `prueba de flow dinamico`}]);
+        await flowDynamic([{body: `prueba de flow dinamico`,media:'https://i.imgur.com/0HpzsEm.png',}]);
         await extensions.handler.sendMessageWoot(response, from, pushName);
     });
 
@@ -67,7 +67,7 @@ const main = async () => {
     adapterProvider.on('message', (payload) => {
         queue.enqueue(async () => {
             try {
-
+                const captionFile = payload?.message?.imageMessage?.caption ?? payload?.message?.videoMessage?.caption ?? payload?.message?.documentMessage?.caption ?? payload?.message?.audioMessage?.caption ?? '';
                 const attachment = []
                
                 if (payload?.body.includes('_event_')) {
@@ -92,7 +92,7 @@ const main = async () => {
                 await handlerMessage({
                     phone: payload.from,
                     name: payload.pushName,
-                    message: payload.body,
+                    message: captionFile ? captionFile : payload.body,
                     attachment,
                     mode: 'incoming'
                 }, chatwoot)

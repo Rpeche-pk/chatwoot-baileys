@@ -40,8 +40,10 @@ class ServerHttp {
         const attachments = body?.attachments
         const bot = req.bot;
         try {
+            //console.log(JSON.stringify(body));
 
-            const mapperAttributes = body?.changed_attributes?.map((a) => Object.keys(a)).flat(2)
+            const mapperAttributes = body?.changed_attributes?.map((a) => Object.keys(a)).flat(2); //[ 'assignee_id', 'updated_at' ]
+            
 
             /**
              * Esta funcion se encarga de agregar o remover el numero a la blacklist
@@ -52,7 +54,7 @@ class ServerHttp {
             if (body?.event === 'conversation_updated' && mapperAttributes.includes('assignee_id')) {
                 const phone = body?.meta?.sender?.phone_number.replace('+', '')
                 const idAssigned = body?.changed_attributes[0]?.assignee_id?.current_value ?? null
-                console.log(`[BLACKLIST] ${phone} ${idAssigned}`);
+                console.log(chalk.bgCyan(`[BLACKLIST]`), chalk.green.bold(`${phone} - asesor ${idAssigned ?? 'sin asignar'}`));
                 if(idAssigned){
                     bot.dynamicBlacklist.add(phone)
                 }else{
@@ -61,6 +63,14 @@ class ServerHttp {
                 res.send('ok')
                 return
             }
+
+            /*if(body?.conversation?.meta?.sender?.custom_attributes?.bot === 'on'){
+                bot.dynamicBlacklist.remove(body?.meta?.sender?.phone_number.replace('+', ''));
+            }else{
+                console.log(`[BLACKLIST] numero ${body?.meta?.sender?.phone_number.replace('+', '')} agregado a la blacklist`);
+                bot.dynamicBlacklist.add(body?.meta?.sender?.phone_number.replace('+', ''));
+            }*/
+
 
             /**
              * La parte que se encarga de determinar si un mensaje es enviado al whatsapp del cliente
@@ -106,7 +116,7 @@ class ServerHttp {
                     {}
                 );
                 console.log(chalk.green.bold(`<<<<[MENSAJE ENVIADO DESDE CHAT WOOT]`),chalk.cyan(`📋 ${content}`));
-
+                //console.log(JSON.stringify(body));
                 res.send('ok');
                 return;
                
@@ -137,11 +147,11 @@ class ServerHttp {
         })
 
         this.app.post(`/chatwoot`, this.chatwootCtrl)
-        this.app.get('/scan-qr',this.qrCtrl)
+        //this.app.get('/scan-qr',this.qrCtrl)
 
         this.app.listen(this.port, () => {
             console.log(``)
-            console.log(`🦮 http://localhost:${this.port}/scan-qr`)
+            console.log(`🦮 http://localhost:${this.port}`)
             console.log(``)
         })
     }
