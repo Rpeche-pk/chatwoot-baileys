@@ -1,9 +1,12 @@
 const express = require('express')
+require('dotenv').config()
 const cors = require('cors')
 const {join} = require('path')
 const {createReadStream} = require('fs')
 const {wait, getRandomDelay,typingTime} = require('../util/delay.util');
 const chalk = require('chalk');
+const { black } = require('../util/blacklist.class');
+
 
 /**
  * Esta clase esta relacionada con todo lo que tiene que ver
@@ -30,6 +33,27 @@ class ServerHttp {
         fileStream.pipe(res);
     }
 
+    authenticate(req, res, next) {
+        const authHeader = req.headers.authorization;
+        if (!authHeader) {
+            return res.status(401).send('Authorization header is required');
+        }
+        const token = authHeader.split(' ')[1];
+        if (token !== process.env.TOKEN) {
+            return res.status(403).send('Invalid token');
+        }
+        next();
+    }
+
+    removeBlackList = async (req,res) => {
+        black.removeBlackList(req.body.phone);
+        res.send('Uuario removida de la blacklist: ok')
+    }
+
+    addBlackList = async (req,res) => {
+        black.addBlackList(req.body.phone);
+        res.send('Usuario agregado a la blacklist: ok')
+    }
     /**
      * Este el controlador del los enventos del Chatwoot
      * @param {*} req 
@@ -40,7 +64,6 @@ class ServerHttp {
         const attachments = body?.attachments
         const bot = req.bot;
         try {
-            //console.log(JSON.stringify(body));
 
             const mapperAttributes = body?.changed_attributes?.map((a) => Object.keys(a)).flat(2); //[ 'assignee_id', 'updated_at' ]
             
@@ -66,18 +89,20 @@ class ServerHttp {
                 return
             }
 
-            /*if(body?.event === 'contact_updated' && body?.custom_attributes?.bot){
-                if (body?.custom_attributes?.bot === 'on') {
-                    console.log(`[BLACKLIST] numero ${body?.phone_number.replace('+', '')} removido de la blacklist`);
-                    bot.dynamicBlacklist.remove(body?.phone_number.replace('+', ''));
-                }else{
-                    console.log(`[BLACKLIST] numero ${body?.phone_number.replace('+', '')} agregado a la blacklist`);
-                    bot.dynamicBlacklist.add(body?.phone_number.replace('+', ''));
-                }
-                res.send('ok')
-                return;
-            }*/
 
+            //todo pasa saber si cerre la conversación o no dejando un mensaje clave en el chatwoot
+            if(body?.event === 'message_created'){
+                if (body?.content === '#off') {
+                    console.log(chalk.bgCyan(`[BLACKLIST] ADD PHONE`) , chalk.green.bold(`numero ${body?.conversation?.meta?.sender?.phone_number.replace('+', '')} removido de la blacklist`));
+                    bot.dynamicBlacklist.remove(body?.conversation?.meta?.sender?.phone_number.replace('+', ''));
+                    return
+                }
+                if (body?.content === '#on') {
+                    console.log(chalk.bgCyan(`[BLACKLIST] REMOVE PHONE`), chalk.green.bold(`numero ${body?.conversation?.meta?.sender?.phone_number.replace('+', '')} agregado a la blacklist`));
+                    bot.dynamicBlacklist.add(body?.conversation?.meta?.sender?.phone_number.replace('+', ''));
+                    return
+                }
+            }
 
             /**
              * La parte que se encarga de determinar si un mensaje es enviado al whatsapp del cliente
@@ -155,6 +180,8 @@ class ServerHttp {
 
         this.app.post(`/chatwoot`, this.chatwootCtrl)
         //this.app.get('/scan-qr',this.qrCtrl)
+        this.app.post('/remove',this.authenticate,this.removeBlackList)
+        this.app.post('/add',this.authenticate,this.addBlackList)
 
         this.app.listen(this.port, () => {
             console.log(``)

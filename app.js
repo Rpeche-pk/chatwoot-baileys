@@ -12,11 +12,12 @@ const { handlerMessage } = require('./src/chatwoot')
 const {convertOggMp3}= require('./src/util/convert.util');
 const chalk = require('chalk');
 const HandlerMessage = require('./src/chatwoot/handler.class');
-
+const getDevice = require('./src/util/device.utils');
+const {black} = require('./src/util/blacklist.class');
 
 const PORT = process.env.PORT ?? 3001
 
-const flowWelcome = addKeyword(EVENTS.WELCOME).addAction(async (ctx,{flowDynamic,state,gotoFlow}) => {
+const flowWelcome = addKeyword("#empezar").addAction(async (ctx,{flowDynamic,state}) => {
     const flag = 'first_message'
     const userState = state?.getMyState();
     if (!userState?.[flag]) {
@@ -35,16 +36,14 @@ const flowPrincipal = addKeyword('#asesor')
     .addAnswer('¿Como puedo ayudarte el dia de hoy?')
     .addAction({capture:true},async (ctx, {extensions, provider, flowDynamic,endFlow}) => {
         const jid= ctx?.key?.remoteJid;
+        console.log("Me escribes desde:",getDevice(ctx?.key?.id));
         const from= ctx?.from;
         const pushName = ctx?.pushName;
         const response=await provider.vendor.sendMessage(jid,{
             image: {url: `https://ik.imagekit.io/ljpa/Profiles/51966524537_30-12-2023_02-41-23.jpg`}, caption:`Hola ${pushName}!, un asesor se comunicara contigo`,
             mimetype: "image/jpeg",
         });
-        console.log(response);
-        await extensions.handler.sendMessageWoot(response, from, pushName);
-        return endFlow();
-        
+        await extensions.handler.sendMessageWoot(response, from, pushName); 
     });
 
 const serverHttp = new ServerHttp(PORT)
@@ -67,8 +66,10 @@ const main = async () => {
 
     const config ={
         extensions: {
-            handler:new HandlerMessage(PORT,chatwoot)
-        }
+            handler:new HandlerMessage(PORT,chatwoot),
+            blacklist: black
+        },
+        blackList: black.getBlackList()
     }
     const bot = await createBot({
         flow: adapterFlow,

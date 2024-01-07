@@ -1,15 +1,15 @@
 [
   {
-    "ref": "c216ecb4-c018-4c6d-bf25-af51f775c086",
-    "keyword": "e0a057dc11401d4ed529c9910cd6009c",
-    "answer": "Hola",
+    "ref": "41a3acf2-2118-4a1b-a94f-1de2d39cf20c",
+    "keyword": "ce86414b524b87452211c54d9f1ab06e",
+    "answer": "#empezar",
     "options": {},
     "from": "51966524537",
-    "refSerialize": "c22e4066d61d81721def9b25d8a397e8"
+    "refSerialize": "3808fdd92072b9dfa6c75b861a7f2200"
   },
   {
-    "ref": "ans_5b9a69bc-c117-497d-8e1c-183d342ec694",
-    "keyword": "key_e413bb1c-0d85-4242-82a9-6c81399229de",
+    "ref": "ans_19a66c9c-ffa3-46d6-8bbf-dae30829685e",
+    "keyword": "key_f78aa665-6f50-46fe-bd9e-a0eef87980dc",
     "answer": "__call_action__",
     "options": {
       "media": null,
@@ -23,11 +23,11 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "d0a93f587f4c613f337ec656b661e151",
+    "refSerialize": "bafb7a4541a33eca1e8ba89204b0bbd3",
     "from": "51966524537"
   },
   {
-    "ref": "eadbdb53-43ac-4552-8b1c-0ecef99157c1",
+    "ref": "3a8f4763-a2e7-4d9e-bd5a-2f2612d91d09",
     "keyword": null,
     "answer": "Bienvenido nuevo usuario",
     "options": {
@@ -38,78 +38,5 @@
     },
     "from": "51966524537",
     "refSerialize": "60de31c832f80716123050688c508cde"
-  },
-  {
-    "ref": "2786c926-dcd4-4adb-bf02-6bc441d29378",
-    "keyword": "d0a93f587f4c613f337ec656b661e151",
-    "answer": "#asesor",
-    "options": {},
-    "from": "51966524537",
-    "refSerialize": "4f0e4ea4808a3ae64710412f30681e4b"
-  },
-  {
-    "ref": "ans_3270209b-2556-4238-af18-7ae3d93d1c35",
-    "keyword": "key_d460fd46-70fc-44d8-b7fc-c121de65332a",
-    "answer": "Buenas bienvenido a mi ecommerce",
-    "options": {
-      "media": null,
-      "buttons": [],
-      "capture": false,
-      "child": null,
-      "delay": 0,
-      "idle": null,
-      "ref": null,
-      "nested": [],
-      "keyword": {},
-      "callback": false
-    },
-    "refSerialize": "74764d161d527c91c79e4b2527a08e07",
-    "from": "51966524537"
-  },
-  {
-    "ref": "ans_1452f74b-56f3-40f0-9b47-ff617dd0c2fa",
-    "keyword": "ans_3270209b-2556-4238-af18-7ae3d93d1c35",
-    "answer": "¿Como puedo ayudarte el dia de hoy?",
-    "options": {
-      "media": null,
-      "buttons": [],
-      "capture": false,
-      "child": null,
-      "delay": 0,
-      "idle": null,
-      "ref": null,
-      "nested": [],
-      "keyword": {},
-      "callback": false
-    },
-    "refSerialize": "74fdeb6f0708427494f965d2ac7a7738",
-    "from": "51966524537"
-  },
-  {
-    "ref": "ans_100a86db-ea6d-439e-ba5f-efba7c7897a5",
-    "keyword": "ans_1452f74b-56f3-40f0-9b47-ff617dd0c2fa",
-    "answer": "__capture_only_intended__",
-    "options": {
-      "media": null,
-      "buttons": [],
-      "capture": true,
-      "child": null,
-      "delay": 0,
-      "idle": null,
-      "ref": null,
-      "nested": [],
-      "keyword": {},
-      "callback": true
-    },
-    "refSerialize": "19cc3ad1f53be5eca7772dad4e11d57d",
-    "from": "51966524537"
-  },
-  {
-    "ref": "b718f137-6224-492c-981a-740f47e88861",
-    "keyword": "19cc3ad1f53be5eca7772dad4e11d57d",
-    "answer": "Jikki",
-    "options": {},
-    "from": "51966524537",
-    "refSerialize": "4440ae70624b54f199da73649921280b"
   }
 ]
