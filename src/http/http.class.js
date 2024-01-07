@@ -73,6 +73,7 @@ class ServerHttp {
              * eso quiere decir que podemos hacer que el chatbot responda o no
              * para que nos sirve, para evitar que el chatbot responda mientras
              * un agente humano esta escribiendo desde chatwoot
+             * FUNCIONA: al asignar un asesor desde chatbot
              */
             if (body?.event === 'conversation_updated' && mapperAttributes.includes('assignee_id')) {
                 const phone = body?.meta?.sender?.phone_number.replace('+', '')
@@ -91,6 +92,8 @@ class ServerHttp {
 
 
             //todo pasa saber si cerre la conversación o no dejando un mensaje clave en el chatwoot
+            // todo FUNCIONA: al cerrar una conversación desde chatwoot escribiendo #off es cuando empieza a responder el asesor humano
+            // todo FUNCIONA: #on es cuando empieza a responder el chatbot
             if(body?.event === 'message_created'){
                 if (body?.content === '#off') {
                     console.log(chalk.bgCyan(`[BLACKLIST] ADD PHONE`) , chalk.green.bold(`numero ${body?.conversation?.meta?.sender?.phone_number.replace('+', '')} removido de la blacklist`));

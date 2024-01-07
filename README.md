@@ -1,7 +1,7 @@
 ### CHATBOT Whatsapp (Baileys Provider)
 
-<p align="center">
-  <img width="300" src="https://i.imgur.com/Oauef6t.png">
+<p>
+  <img src="https://ik.imagekit.io/ljpa/Proyectos/Captura.PNG">
 </p>
 
 
