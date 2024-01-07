@@ -1,23 +1,55 @@
 [
   {
-    "ref": "e048d5f9-3e30-454f-89f3-5fdc82e4380a",
-    "keyword": "c22e4066d61d81721def9b25d8a397e8",
+    "ref": "c216ecb4-c018-4c6d-bf25-af51f775c086",
+    "keyword": "e0a057dc11401d4ed529c9910cd6009c",
     "answer": "Hola",
     "options": {},
     "from": "51966524537",
     "refSerialize": "c22e4066d61d81721def9b25d8a397e8"
   },
   {
-    "ref": "05e68dc0-01fc-40da-88af-9fde4b03f855",
-    "keyword": "c22e4066d61d81721def9b25d8a397e8",
+    "ref": "ans_5b9a69bc-c117-497d-8e1c-183d342ec694",
+    "keyword": "key_e413bb1c-0d85-4242-82a9-6c81399229de",
+    "answer": "__call_action__",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "d0a93f587f4c613f337ec656b661e151",
+    "from": "51966524537"
+  },
+  {
+    "ref": "eadbdb53-43ac-4552-8b1c-0ecef99157c1",
+    "keyword": null,
+    "answer": "Bienvenido nuevo usuario",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "delay": 0
+    },
+    "from": "51966524537",
+    "refSerialize": "60de31c832f80716123050688c508cde"
+  },
+  {
+    "ref": "2786c926-dcd4-4adb-bf02-6bc441d29378",
+    "keyword": "d0a93f587f4c613f337ec656b661e151",
     "answer": "#asesor",
     "options": {},
     "from": "51966524537",
     "refSerialize": "4f0e4ea4808a3ae64710412f30681e4b"
   },
   {
-    "ref": "ans_41a67499-1a32-48f6-8b5b-a0d13383950a",
-    "keyword": "key_4667be94-ca4c-4587-ac70-a35d37d16ebc",
+    "ref": "ans_3270209b-2556-4238-af18-7ae3d93d1c35",
+    "keyword": "key_d460fd46-70fc-44d8-b7fc-c121de65332a",
     "answer": "Buenas bienvenido a mi ecommerce",
     "options": {
       "media": null,
@@ -31,12 +63,12 @@
       "keyword": {},
       "callback": false
     },
-    "refSerialize": "127470f366a3475f4aa78963cb38224d",
+    "refSerialize": "74764d161d527c91c79e4b2527a08e07",
     "from": "51966524537"
   },
   {
-    "ref": "ans_8b9a83e3-0918-44dd-9fde-6475ff363a01",
-    "keyword": "ans_41a67499-1a32-48f6-8b5b-a0d13383950a",
+    "ref": "ans_1452f74b-56f3-40f0-9b47-ff617dd0c2fa",
+    "keyword": "ans_3270209b-2556-4238-af18-7ae3d93d1c35",
     "answer": "¿Como puedo ayudarte el dia de hoy?",
     "options": {
       "media": null,
@@ -50,12 +82,12 @@
       "keyword": {},
       "callback": false
     },
-    "refSerialize": "0775efeb10fa02be042799a98f8a70e8",
+    "refSerialize": "74fdeb6f0708427494f965d2ac7a7738",
     "from": "51966524537"
   },
   {
-    "ref": "ans_2fee040e-feb6-4b6b-afe6-c75b9ee48fbd",
-    "keyword": "ans_8b9a83e3-0918-44dd-9fde-6475ff363a01",
+    "ref": "ans_100a86db-ea6d-439e-ba5f-efba7c7897a5",
+    "keyword": "ans_1452f74b-56f3-40f0-9b47-ff617dd0c2fa",
     "answer": "__capture_only_intended__",
     "options": {
       "media": null,
@@ -69,114 +101,15 @@
       "keyword": {},
       "callback": true
     },
-    "refSerialize": "1fd4d870d9c13907d11de56b450a9a9c",
+    "refSerialize": "19cc3ad1f53be5eca7772dad4e11d57d",
     "from": "51966524537"
   },
   {
-    "ref": "e2ee8489-fd97-4d0f-a5ef-a93bc982a768",
-    "keyword": "1fd4d870d9c13907d11de56b450a9a9c",
-    "answer": "Birn",
+    "ref": "b718f137-6224-492c-981a-740f47e88861",
+    "keyword": "19cc3ad1f53be5eca7772dad4e11d57d",
+    "answer": "Jikki",
     "options": {},
     "from": "51966524537",
-    "refSerialize": "cab6d1c53a4cd5ddb8b2f96547112767"
-  },
-  {
-    "ref": "e12f691e-6926-4701-b522-d6e9205dac24",
-    "keyword": null,
-    "answer": "prueba de flow dinamico",
-    "options": {
-      "media": "https://i.imgur.com/0HpzsEm.png",
-      "buttons": [],
-      "capture": false,
-      "delay": 0
-    },
-    "from": "51966524537",
-    "refSerialize": "6ec55e008f13474bcec8131a7f369a6e"
-  },
-  {
-    "ref": "7b9537e7-db65-487d-a06f-8fae584693fb",
-    "keyword": "cab6d1c53a4cd5ddb8b2f96547112767",
-    "answer": "#asesor",
-    "options": {},
-    "from": "51966524537",
-    "refSerialize": "4f0e4ea4808a3ae64710412f30681e4b"
-  },
-  {
-    "ref": "ans_41a67499-1a32-48f6-8b5b-a0d13383950a",
-    "keyword": "key_4667be94-ca4c-4587-ac70-a35d37d16ebc",
-    "answer": "Buenas bienvenido a mi ecommerce",
-    "options": {
-      "media": null,
-      "buttons": [],
-      "capture": false,
-      "child": null,
-      "delay": 0,
-      "idle": null,
-      "ref": null,
-      "nested": [],
-      "keyword": {},
-      "callback": false
-    },
-    "refSerialize": "127470f366a3475f4aa78963cb38224d",
-    "from": "51966524537"
-  },
-  {
-    "ref": "ans_8b9a83e3-0918-44dd-9fde-6475ff363a01",
-    "keyword": "ans_41a67499-1a32-48f6-8b5b-a0d13383950a",
-    "answer": "¿Como puedo ayudarte el dia de hoy?",
-    "options": {
-      "media": null,
-      "buttons": [],
-      "capture": false,
-      "child": null,
-      "delay": 0,
-      "idle": null,
-      "ref": null,
-      "nested": [],
-      "keyword": {},
-      "callback": false
-    },
-    "refSerialize": "0775efeb10fa02be042799a98f8a70e8",
-    "from": "51966524537"
-  },
-  {
-    "ref": "ans_2fee040e-feb6-4b6b-afe6-c75b9ee48fbd",
-    "keyword": "ans_8b9a83e3-0918-44dd-9fde-6475ff363a01",
-    "answer": "__capture_only_intended__",
-    "options": {
-      "media": null,
-      "buttons": [],
-      "capture": true,
-      "child": null,
-      "delay": 0,
-      "idle": null,
-      "ref": null,
-      "nested": [],
-      "keyword": {},
-      "callback": true
-    },
-    "refSerialize": "1fd4d870d9c13907d11de56b450a9a9c",
-    "from": "51966524537"
-  },
-  {
-    "ref": "345cfb69-0dc9-4576-8f18-fabffc129c7c",
-    "keyword": "1fd4d870d9c13907d11de56b450a9a9c",
-    "answer": "Goodd",
-    "options": {},
-    "from": "51966524537",
-    "refSerialize": "7435959a587a60a32869e9023201a369"
-  },
-  {
-    "ref": "9be8fcfe-c596-4e22-8962-94c9f06e63f6",
-    "keyword": null,
-    "answer": "prueba de flow dinamico",
-    "options": {
-      "media": "https://i.imgur.com/0HpzsEm.png",
-      "buttons": [],
-      "capture": false,
-      "delay": 0
-    },
-    "from": "51966524537",
-    "refSerialize": "6ec55e008f13474bcec8131a7f369a6e"
+    "refSerialize": "4440ae70624b54f199da73649921280b"
   }
 ]

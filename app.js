@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { createBot, createProvider, createFlow, addKeyword } = require('@bot-whatsapp/bot')
+const { createBot, createProvider, createFlow, addKeyword,EVENTS } = require('@bot-whatsapp/bot')
 const Queue = require('queue-promise')
 const mimeType = require('mime-types')
 const fs = require('node:fs/promises');
@@ -13,22 +13,38 @@ const {convertOggMp3}= require('./src/util/convert.util');
 const chalk = require('chalk');
 const HandlerMessage = require('./src/chatwoot/handler.class');
 
+
 const PORT = process.env.PORT ?? 3001
+
+const flowWelcome = addKeyword(EVENTS.WELCOME).addAction(async (ctx,{flowDynamic,state,gotoFlow}) => {
+    const flag = 'first_message'
+    const userState = state?.getMyState();
+    if (!userState?.[flag]) {
+        await state?.update(
+            {
+                [flag] : true
+            }
+        )
+        return await flowDynamic('Bienvenido nuevo usuario');
+    }
+    return flowDynamic('Bienvenido de nuevo!!!');
+})
 
 const flowPrincipal = addKeyword('#asesor')
     .addAnswer('Buenas bienvenido a mi ecommerce')
     .addAnswer('¿Como puedo ayudarte el dia de hoy?')
-    .addAction({capture:true},async (ctx, {extensions, provider, flowDynamic}) => {
+    .addAction({capture:true},async (ctx, {extensions, provider, flowDynamic,endFlow}) => {
         const jid= ctx?.key?.remoteJid;
         const from= ctx?.from;
         const pushName = ctx?.pushName;
         const response=await provider.vendor.sendMessage(jid,{
-            image: {url: `https://ik.imagekit.io/ljpa/Profiles/51966524537_30-12-2023_02-41-23.jpg`}, caption:`Hola ${pushName}!`,
+            image: {url: `https://ik.imagekit.io/ljpa/Profiles/51966524537_30-12-2023_02-41-23.jpg`}, caption:`Hola ${pushName}!, un asesor se comunicara contigo`,
             mimetype: "image/jpeg",
         });
         console.log(response);
-        await flowDynamic([{body: `prueba de flow dinamico`,media:'https://i.imgur.com/0HpzsEm.png',}]);
         await extensions.handler.sendMessageWoot(response, from, pushName);
+        return endFlow();
+        
     });
 
 const serverHttp = new ServerHttp(PORT)
@@ -46,7 +62,7 @@ const queue = new Queue({
 
 const main = async () => {
     const adapterDB = new JsonFileAdapter()
-    const adapterFlow = createFlow([flowPrincipal])
+    const adapterFlow = createFlow([flowPrincipal,flowWelcome])
     const adapterProvider = createProvider(BaileysProvider,{ usePairingCode: process.env.USE_PAIRING_CODE, phoneNumber: process.env.PHONE_NUMBER})
 
     const config ={

@@ -56,19 +56,26 @@ class ServerHttp {
                 const idAssigned = body?.changed_attributes[0]?.assignee_id?.current_value ?? null
                 console.log(chalk.bgCyan(`[BLACKLIST]`), chalk.green.bold(`${phone} - asesor ${idAssigned ?? 'sin asignar'}`));
                 if(idAssigned){
+                    console.log(chalk.bgCyan(`[BLACKLIST] ADD`), chalk.green.bold(`${phone}`));
                     bot.dynamicBlacklist.add(phone)
                 }else{
+                    console.log(chalk.bgCyan(`[BLACKLIST] REMOVE`), chalk.green.bold(`${phone}`));
                     bot.dynamicBlacklist.remove(phone)
                 }
                 res.send('ok')
                 return
             }
 
-            /*if(body?.conversation?.meta?.sender?.custom_attributes?.bot === 'on'){
-                bot.dynamicBlacklist.remove(body?.meta?.sender?.phone_number.replace('+', ''));
-            }else{
-                console.log(`[BLACKLIST] numero ${body?.meta?.sender?.phone_number.replace('+', '')} agregado a la blacklist`);
-                bot.dynamicBlacklist.add(body?.meta?.sender?.phone_number.replace('+', ''));
+            /*if(body?.event === 'contact_updated' && body?.custom_attributes?.bot){
+                if (body?.custom_attributes?.bot === 'on') {
+                    console.log(`[BLACKLIST] numero ${body?.phone_number.replace('+', '')} removido de la blacklist`);
+                    bot.dynamicBlacklist.remove(body?.phone_number.replace('+', ''));
+                }else{
+                    console.log(`[BLACKLIST] numero ${body?.phone_number.replace('+', '')} agregado a la blacklist`);
+                    bot.dynamicBlacklist.add(body?.phone_number.replace('+', ''));
+                }
+                res.send('ok')
+                return;
             }*/
 
 
@@ -124,7 +131,7 @@ class ServerHttp {
 
             res.send('ok')
         } catch (error) {
-            console.log(error)
+            console.log(chalk.bgRed(`[ERROR ${error.name}]`),chalk.cyan.bold(error.message))
             return res.status(405).send('Error')
         }
     }
