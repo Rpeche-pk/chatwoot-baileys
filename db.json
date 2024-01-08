@@ -1,16 +1,35 @@
 [
   {
-    "ref": "41a3acf2-2118-4a1b-a94f-1de2d39cf20c",
-    "keyword": "ce86414b524b87452211c54d9f1ab06e",
-    "answer": "#empezar",
+    "ref": "54dbbb7d-1a61-4365-bb68-a26478398c3c",
+    "keyword": "78239810d02a8eea29cc41d8e9d7ceb5",
+    "answer": "#asesor",
     "options": {},
     "from": "51966524537",
-    "refSerialize": "3808fdd92072b9dfa6c75b861a7f2200"
+    "refSerialize": "4f0e4ea4808a3ae64710412f30681e4b"
   },
   {
-    "ref": "ans_19a66c9c-ffa3-46d6-8bbf-dae30829685e",
-    "keyword": "key_f78aa665-6f50-46fe-bd9e-a0eef87980dc",
-    "answer": "__call_action__",
+    "ref": "ans_41850a5e-7b77-4911-9ba5-1c70ccb423a6",
+    "keyword": "key_564aa30a-6e48-4a57-9856-eabb08f837e4",
+    "answer": "Buenas bienvenido a mi ecommerce",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 550,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": false
+    },
+    "refSerialize": "90208688d85b19ad4a2fb684deddc1a1",
+    "from": "51966524537"
+  },
+  {
+    "ref": "ans_7ae62369-0953-4c2a-a4e7-1e5d08705f7c",
+    "keyword": "ans_41850a5e-7b77-4911-9ba5-1c70ccb423a6",
+    "answer": "¿Como puedo ayudarte el dia de hoy?",
     "options": {
       "media": null,
       "buttons": [],
@@ -21,22 +40,109 @@
       "ref": null,
       "nested": [],
       "keyword": {},
-      "callback": true
+      "callback": false
     },
-    "refSerialize": "bafb7a4541a33eca1e8ba89204b0bbd3",
+    "refSerialize": "1d3e7bf114e376ccdea9233831e3ac05",
     "from": "51966524537"
   },
   {
-    "ref": "3a8f4763-a2e7-4d9e-bd5a-2f2612d91d09",
-    "keyword": null,
-    "answer": "Bienvenido nuevo usuario",
+    "ref": "ans_3f6aafba-d96d-45c7-8fbf-31effe785f85",
+    "keyword": "ans_7ae62369-0953-4c2a-a4e7-1e5d08705f7c",
+    "answer": "__capture_only_intended__",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": true,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "646fc9c44aa20ad13f16d3ae47d019a1",
+    "from": "51966524537"
+  },
+  {
+    "ref": "867546c9-112b-4705-b837-463b2ce6306f",
+    "keyword": "646fc9c44aa20ad13f16d3ae47d019a1",
+    "answer": "Gigi",
+    "options": {},
+    "from": "51966524537",
+    "refSerialize": "df3ca94ee2fe681f9a0ea38f0e3c4353"
+  },
+  {
+    "ref": "bd67ff36-a2c6-4490-9b3d-b12c257896a5",
+    "keyword": "df3ca94ee2fe681f9a0ea38f0e3c4353",
+    "answer": "#asesor",
+    "options": {},
+    "from": "51966524537",
+    "refSerialize": "4f0e4ea4808a3ae64710412f30681e4b"
+  },
+  {
+    "ref": "ans_41850a5e-7b77-4911-9ba5-1c70ccb423a6",
+    "keyword": "key_564aa30a-6e48-4a57-9856-eabb08f837e4",
+    "answer": "Buenas bienvenido a mi ecommerce",
     "options": {
       "media": null,
       "buttons": [],
       "capture": false,
-      "delay": 0
+      "child": null,
+      "delay": 550,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": false
     },
+    "refSerialize": "90208688d85b19ad4a2fb684deddc1a1",
+    "from": "51966524537"
+  },
+  {
+    "ref": "ans_7ae62369-0953-4c2a-a4e7-1e5d08705f7c",
+    "keyword": "ans_41850a5e-7b77-4911-9ba5-1c70ccb423a6",
+    "answer": "¿Como puedo ayudarte el dia de hoy?",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": false,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": false
+    },
+    "refSerialize": "1d3e7bf114e376ccdea9233831e3ac05",
+    "from": "51966524537"
+  },
+  {
+    "ref": "ans_3f6aafba-d96d-45c7-8fbf-31effe785f85",
+    "keyword": "ans_7ae62369-0953-4c2a-a4e7-1e5d08705f7c",
+    "answer": "__capture_only_intended__",
+    "options": {
+      "media": null,
+      "buttons": [],
+      "capture": true,
+      "child": null,
+      "delay": 0,
+      "idle": null,
+      "ref": null,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "646fc9c44aa20ad13f16d3ae47d019a1",
+    "from": "51966524537"
+  },
+  {
+    "ref": "c5abcffb-6e79-4543-994c-0064e0e3f54f",
+    "keyword": "646fc9c44aa20ad13f16d3ae47d019a1",
+    "answer": "Guhhjk",
+    "options": {},
     "from": "51966524537",
-    "refSerialize": "60de31c832f80716123050688c508cde"
+    "refSerialize": "bee33866be8ae714c38495cdadf6a000"
   }
 ]

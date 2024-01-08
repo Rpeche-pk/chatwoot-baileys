@@ -96,6 +96,9 @@ class HandlerMessage {
       contact_id: contact.id,
       phone_number: dataIn.phone,
     });
+    //todo permite asignarme un agente humano con estado 'online' a la conversacion (asignacion random)
+    await chatwoot.assignAgentConversation({ conversation_id: conversation.id })
+   
     await chatwoot.createMessage({
       msg: dataIn.message,
       mode: dataIn.mode,

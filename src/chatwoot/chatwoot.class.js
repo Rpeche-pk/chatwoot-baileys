@@ -1,5 +1,4 @@
 const chalk = require("chalk");
-const { log } = require("console");
 const { readFile } = require("fs/promises");
 class ChatwootClass {
   config = {
@@ -367,6 +366,36 @@ class ChatwootClass {
     }
   };
 
+
+  getAgentsAvailable = async () => {
+    const url = this.buildBaseUrl(`/agents`);
+    const dataFetch = await fetch(url, {
+      method: "GET",
+      headers: this.buildHeader(),
+    });
+    const data = await dataFetch.json();
+    const agents =data.filter(agent => agent.availability_status === 'online')
+    .map(agent => ({id: agent.id, availability_status: agent.availability_status ,name: agent.name, thumbnail: agent.thumbnail }))
+    
+    return agents;
+  }
+
+  assignAgentConversation = async (dataIn={conversation_id:''}) => {
+    const url = this.buildBaseUrl(`/conversations/${dataIn.conversation_id}/assignments`);
+    const agents=await this.getAgentsAvailable();
+
+    const payload={
+      assignee_id: agents.length > 1 ? agents[Math.floor(Math.random() * agents.length)].id : agents[0]?.id ?? 0 ,
+      team_id: ''
+    }
+    const dataFetch = await fetch(url, {
+      method: "POST",
+      headers: this.buildHeader(),
+      body: JSON.stringify(payload),
+    });
+    const data = await dataFetch.json();
+    return data;
+  }
 
   // TODO 👇🏼👇🏼👇🏼👇🏼 ESTAs funciones son algunos endpoint de chatwoot para usarlo A FUTURO 👇🏼👇🏼👇🏼👇🏼
   /**

@@ -11,11 +11,12 @@ const ChatwootClass = require('./src/chatwoot/chatwoot.class')
 const { handlerMessage } = require('./src/chatwoot')
 const {convertOggMp3}= require('./src/util/convert.util');
 const chalk = require('chalk');
-const HandlerMessage = require('./src/chatwoot/handler.class');
+const HandlerMessage = require('./src/chatwoot/handler.chatwoot');
 const getDevice = require('./src/util/device.utils');
 const {black} = require('./src/util/blacklist.class');
+//const QRPortalWeb = require("@bot-whatsapp/portal");
 
-const PORT = process.env.PORT ?? 3001
+const PORT = process.env.PORT_BOT ?? 3001
 
 const flowWelcome = addKeyword("#empezar").addAction(async (ctx,{flowDynamic,state}) => {
     const flag = 'first_message'
@@ -32,7 +33,7 @@ const flowWelcome = addKeyword("#empezar").addAction(async (ctx,{flowDynamic,sta
 })
 
 const flowPrincipal = addKeyword('#asesor')
-    .addAnswer('Buenas bienvenido a mi ecommerce')
+    .addAnswer('Buenas bienvenido a mi ecommerce',{delay:550})
     .addAnswer('¿Como puedo ayudarte el dia de hoy?')
     .addAction({capture:true},async (ctx, {extensions, provider, flowDynamic,endFlow}) => {
         const jid= ctx?.key?.remoteJid;
@@ -44,6 +45,7 @@ const flowPrincipal = addKeyword('#asesor')
             mimetype: "image/jpeg",
         });
         await extensions.handler.sendMessageWoot(response, from, pushName); 
+
     });
 
 const serverHttp = new ServerHttp(PORT)
@@ -67,7 +69,8 @@ const main = async () => {
     const config ={
         extensions: {
             handler:new HandlerMessage(PORT,chatwoot),
-            blacklist: black
+            blacklist: black,
+            chatwoot: chatwoot
         },
         blackList: black.getBlackList()
     }
